@@ -28,4 +28,8 @@ public class add {
         border();
         System.exit(0);
     }
+
+    public static void salahLogin() {
+        System.out.println("Username atau Password Salah!");
+    }
 }
