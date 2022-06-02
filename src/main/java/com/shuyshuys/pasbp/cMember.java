@@ -4,6 +4,7 @@ public class cMember {
     int id;
     String nama;
     String password;
+    cMember next;
 
     cMember(int id, String nama, String password) {
         this.id = id;
@@ -11,27 +12,27 @@ public class cMember {
         this.password = password;
     }
 
-    public int getKodePembeli() {
+    public int getID() {
         return id;
     }
 
-    public String getNamaPembeli() {
+    public String getNama() {
         return nama;
     }
 
-    public String getPasswordPembeli() {
+    public String getPassword() {
         return password;
     }
 
-    public void setKodePembeli(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public void setNamaPembeli(String nama) {
+    public void setNama(String nama) {
         this.nama = nama;
     }
 
-    public void setPasswordPembeli(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
