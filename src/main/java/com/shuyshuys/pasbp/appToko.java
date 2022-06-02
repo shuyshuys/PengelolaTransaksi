@@ -18,6 +18,9 @@ public class appToko {
         llMember.tambahMember(siti);
         llMember.tambahMember(sri);
 
+        String username;
+        String password;
+
         String userAdmin = "admin";
         String passAdmin = "admin";
 
@@ -122,9 +125,9 @@ public class appToko {
                     System.out.println("\n  Menu Anggota");
                     add.border();
                     System.out.print("Masukkan username: ");
-                    String username = sc.next();
+                    username = sc.next();
                     System.out.print("Masukkan password: ");
-                    String password = sc.next();
+                    password = sc.next();
                     if (llMember.cariMember(username, password) == true) {
                         System.out.println("  Selamat datang " + username);
                         do {
@@ -167,19 +170,43 @@ public class appToko {
                             }
                         } while (pilih2 != 4);
                     } else {
-                        System.out.println("  Username atau password salah");
+                        add.salahLogin();
                     }
 
                     break;
                 case 3:
                     // Admin
                     // Admin : diikuti dengan pengisian password.
+                    add.cls();
+                    add.border();
+                    System.out.println("\n  Menu Admin");
+                    add.border();
+                    System.out.print("Masukkan username: ");
+                    username = sc.next();
+                    System.out.print("Masukkan password: ");
+                    password = sc.next();
+                    if (username.equalsIgnoreCase(userAdmin) && password.equalsIgnoreCase(passAdmin)) {
 
+                    } else {
+                        add.salahLogin();
+                    }
                     break;
                 case 4:
                     // Pemilik
                     // Pemilik : diikuti dengan pengisian password.
+                    add.cls();
+                    add.border();
+                    System.out.println("\n  Menu Pemilik");
+                    add.border();
+                    System.out.print("Masukkan username: ");
+                    username = sc.next();
+                    System.out.print("Masukkan password: ");
+                    password = sc.next();
+                    if (username.equalsIgnoreCase(userPemilik) && password.equalsIgnoreCase(passPemilik)) {
 
+                    } else {
+                        add.salahLogin();
+                    }
                     break;
                 case 5:
                     // Keluar
