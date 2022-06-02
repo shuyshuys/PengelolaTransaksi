@@ -1,14 +1,14 @@
 package com.shuyshuys.pasbp;
 
 public class cTransaksi {
-    String kode;
+    int kode;
     String namaPembeli;
     cBarang barang;
     int jumlahBarang;
     int statusTransaksi;
     cTransaksi next;
 
-    cTransaksi(String kode, String namaPembeli, cBarang barang, int jumlahBarang, int statusTransaksi) {
+    cTransaksi(int kode, String namaPembeli, cBarang barang, int jumlahBarang, int statusTransaksi) {
         this.kode = kode;
         this.namaPembeli = namaPembeli;
         this.barang = barang;
@@ -25,7 +25,7 @@ public class cTransaksi {
         this.next = next;
     }
 
-    public void setKode(String kode) {
+    public void setKode(int kode) {
         this.kode = kode;
     }
 
@@ -45,7 +45,7 @@ public class cTransaksi {
         return statusTransaksi;
     }
 
-    public String getKode() {
+    public int getKode() {
         return kode;
     }
 
