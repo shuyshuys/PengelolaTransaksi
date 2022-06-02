@@ -7,6 +7,7 @@ public class cBarang {
     cBarang(String nama, int harga) {
         this.nama = nama;
         this.harga = harga;
+        System.out.println("Barang " + nama + " berhasil ditambahkan");
     }
 
     public String getNama() {
