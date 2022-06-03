@@ -22,6 +22,14 @@ public class add {
         }
     }
 
+    public static void sleep10s() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void exit() {
         border();
         System.out.println("Terima Kasih Telah Menggunakan Program ini!");
@@ -31,5 +39,15 @@ public class add {
 
     public static void salahLogin() {
         System.out.println("Username atau Password Salah!");
+    }
+
+    static void namaKelompok() {
+        border();
+        System.out.println("[Anggota Kelompok]");
+        border();
+        System.out.println("1.Vina Ishalatussilmi \t\t[21082010127]");
+        System.out.println("2.Ahmad Yazid Isnandar \t\t[21082010129]");
+        System.out.println("3.An-Nisaa Respati Nurcahyengsi\t[21082010139]");
+        border();
     }
 }

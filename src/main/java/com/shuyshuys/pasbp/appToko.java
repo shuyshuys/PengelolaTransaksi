@@ -36,13 +36,14 @@ public class appToko {
         do {
             add.cls();
             add.border();
-            System.out.println("\nMenu level pengguna");
+            System.out.println("Menu level pengguna");
             add.border();
             System.out.println("1. Pembeli");
             System.out.println("2. Anggota / Member");
             System.out.println("3. Admin");
             System.out.println("4. Pemilik");
-            System.out.println("5. Keluar");
+            System.out.println("5. Anggota Kelompok");
+            System.out.println("6. Keluar");
             System.out.print("Pilih menu = ");
             pilih = sc.nextInt();
             switch (pilih) {
@@ -209,15 +210,20 @@ public class appToko {
                     }
                     break;
                 case 5:
+                    add.cls();
+                    add.namaKelompok();
+                    add.sleep10s();
+                    break;
+                case 6:
                     // Keluar
-                    System.out.println("Terima kasih telah menggunakan aplikasi kami");
+                    add.exit();
                     break;
                 default:
                     System.out.println("Pilihan tidak ada");
                     break;
             }
 
-        } while (pilih != 5);
+        } while (pilih != 6);
         sc.close();
     }
 }
