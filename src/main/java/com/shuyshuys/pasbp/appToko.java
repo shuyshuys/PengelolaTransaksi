@@ -11,7 +11,7 @@ public class appToko {
     static cBarang kaos = new cBarang("Kaos", 450000);
 
     public static void main(String[] args) {
-        add.cls();
+        // add.cls();
         Scanner sc = new Scanner(System.in);
 
         cMember budi = new cMember(101, "Budi", "budi");
@@ -36,7 +36,7 @@ public class appToko {
         int kodeTr = 200;
         // add.sleep3s();
         do {
-            add.cls();
+            // add.cls();
             add.border();
             System.out.println("Menu level pengguna");
             add.border();
@@ -52,7 +52,7 @@ public class appToko {
                 case 1:
                     // Pembeli
                     // Pembeli : diikuti pengisian data nama
-                    add.cls();
+                    // add.cls();
                     kodeTr++;
                     add.border();
                     System.out.println("  Menu Pembeli");
@@ -60,7 +60,7 @@ public class appToko {
                     System.out.print("Masukkan nama pembeli: ");
                     String namaPembeli = sc.next();
                     do {
-                        add.cls();
+                        // add.cls();
                         add.border();
                         System.out.println("  Pembeli [" + namaPembeli + "]");
                         add.border();
@@ -83,58 +83,58 @@ public class appToko {
                                 add.border();
                                 switch (pilihBarang) {
                                     case 1:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         tas,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     case 2:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         sandal,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     case 3:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         sepatu,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     case 4:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         baju,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     case 5:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         celana,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     case 6:
-                                        daftarTransaksi.tambahTransaksi(
+                                        daftarTransaksi.enqueueTransaksi(
                                                 new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         kaos,
                                                         jumlahBarang,
                                                         0));
-                                        add.sleep3s();
+                                        // add.sleep3s();
                                         break;
                                     default:
                                         System.out.println("Barang tidak ditemukan");
@@ -142,19 +142,20 @@ public class appToko {
                                 }
                                 break;
                             case 2:
-                                daftarTransaksi.lihatTransaksi();
+                                daftarTransaksi.peekTransaksi();
                                 System.out.print("Barang yang dihapus: ");
                                 String barang = sc.next();
-                                daftarTransaksi.hapusTransaksi(namaPembeli, barang);
-                                add.sleep10s();
+                                daftarTransaksi.cariHapusTransaksi(namaPembeli, barang);
+                                add.sleep5s();
                                 break;
                             case 3:
                                 add.border();
-                                daftarTransaksi.lihatTransaksi();
+                                daftarTransaksi.peekTransaksi();
                                 add.sleep3s();
                                 break;
                             case 4:
-
+                                System.out.println("Kembali ke menu sebelumnya...");
+                                add.sleep3s();
                                 break;
                             case 5:
                                 add.exit();
@@ -196,46 +197,23 @@ public class appToko {
                             pilih2 = sc.nextInt();
                             switch (pilih2) {
                                 case 1:
-                                    System.out.println("1. [" + tas.getNama() + "]  [" + tas.getHarga() + "]");
-                                    System.out.println("2. [" + sandal.getNama() + "]  [" + sandal.getHarga() + "]");
-                                    System.out.println("3. [" + sepatu.getNama() + "]  [" + sepatu.getHarga() + "]");
-                                    System.out.print("pilih barang: ");
-                                    int pilihBarang = sc.nextInt();
-                                    System.out.print("jumlah barang: ");
-                                    int jumlahBarang = sc.nextInt();
-                                    switch (pilihBarang) {
-                                        case 1:
-                                            // daftarTransaksi.tambahTransaksi(new cTransaksi(kodeTr,
-                                            // llMember.getNama(username),
-                                            // tas,
-                                            // jumlahBarang, 0));
-                                            break;
-                                        case 2:
-                                            // daftarTransaksi.tambahTransaksi(
-                                            // new cTransaksi(kodeTr, llMember.getNama(username), sandal,
-                                            // jumlahBarang, 0));
-                                            break;
-                                        case 3:
-                                            // daftarTransaksi.tambahTransaksi(
-                                            // new cTransaksi(kodeTr, llMember.getNama(username), sepatu,
-                                            // jumlahBarang, 0));
-                                            break;
-                                        case 4:
-                                            // Ubah password
-                                            break;
-                                        default:
-                                            System.out.println("Barang tidak ditemukan");
-                                            break;
-                                    }
+                                    // tambah transaksi
+
                                     break;
                                 case 2:
+                                    // hapus transaksi
+
                                     break;
                                 case 3:
+                                    // lihat transaksi
+
                                     break;
                                 case 4:
+                                    // Ubah password
+
                                     break;
                                 case 5:
-                                    System.out.println("Kembali ke menu sebelumnya");
+                                    System.out.println("Kembali ke menu sebelumnya...");
                                     add.sleep3s();
                                     break;
                                 case 6:
