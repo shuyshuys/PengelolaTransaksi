@@ -3,11 +3,16 @@ package com.shuyshuys.pasbp;
 import java.util.Scanner;
 
 public class appToko {
+    static cBarang tas = new cBarang("Tas", 100000);
+    static cBarang sandal = new cBarang("Sandal", 50000);
+    static cBarang sepatu = new cBarang("Sepatu", 150000);
+    static cBarang baju = new cBarang("Baju", 250000);
+    static cBarang celana = new cBarang("Celana", 350000);
+    static cBarang kaos = new cBarang("Kaos", 450000);
+
     public static void main(String[] args) {
+        add.cls();
         Scanner sc = new Scanner(System.in);
-        cBarang tas = new cBarang("Tas", 100000);
-        cBarang sandal = new cBarang("Sandal", 50000);
-        cBarang sepatu = new cBarang("Sepatu", 150000);
 
         cMember budi = new cMember(101, "Budi", "budi");
         cMember siti = new cMember(102, "Siti", "siti");
@@ -18,8 +23,7 @@ public class appToko {
         llMember.tambahMember(siti);
         llMember.tambahMember(sri);
 
-        String username;
-        String password;
+        String username, password;
 
         String userAdmin = "admin";
         String passAdmin = "admin";
@@ -27,12 +31,10 @@ public class appToko {
         String userPemilik = "pemilik";
         String passPemilik = "pemilik";
 
-        // cDaftarTransaksi llMember = new cDaftarTransaksi();
-        // llMember.tambahMember(m1);
-
-        cDaftarTransaksi beli = new cDaftarTransaksi();
+        cDaftarTransaksi daftarTransaksi = new cDaftarTransaksi();
         int pilih = 0, pilih2 = 0;
-        int kode = 200;
+        int kodeTr = 200;
+        // add.sleep3s();
         do {
             add.cls();
             add.border();
@@ -50,54 +52,89 @@ public class appToko {
                 case 1:
                     // Pembeli
                     // Pembeli : diikuti pengisian data nama
-                    kode++;
-                    System.out.println("\n  Menu Pembeli");
+                    add.cls();
+                    kodeTr++;
+                    add.border();
+                    System.out.println("  Menu Pembeli");
+                    add.border();
                     System.out.print("Masukkan nama pembeli: ");
                     String namaPembeli = sc.next();
                     do {
-                        System.out.println("\n");
+                        add.cls();
                         add.border();
                         System.out.println("  Pembeli [" + namaPembeli + "]");
                         add.border();
                         System.out.println("  1. Tambah Transaksi");
                         System.out.println("  2. Hapus Transaksi");
                         System.out.println("  3. Lihat Transaksi");
-                        System.out.println("  4. Keluar");
+                        System.out.println("  4. Kembali");
+                        System.out.println("  5. Keluar");
                         System.out.print("  Pilih menu = ");
                         pilih2 = sc.nextInt();
                         switch (pilih2) {
                             case 1:
-                                System.out.println("1. [" + tas.getNama() + "]  [" + tas.getHarga() + "]");
-                                System.out.println("2. [" + sandal.getNama() + "]  [" + sandal.getHarga() + "]");
-                                System.out.println("3. [" + sepatu.getNama() + "]  [" + sepatu.getHarga() + "]");
-                                System.out.print("pilih barang: ");
+                                add.border();
+                                printBarang();
+                                add.border();
+                                System.out.print("  Pilih barang: ");
                                 int pilihBarang = sc.nextInt();
-                                System.out.print("jumlah barang: ");
+                                System.out.print("  Jumlah barang: ");
                                 int jumlahBarang = sc.nextInt();
+                                add.border();
                                 switch (pilihBarang) {
                                     case 1:
-                                        beli.tambahTransaksi(
-                                                new cTransaksi(kode,
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         tas,
                                                         jumlahBarang,
                                                         0));
+                                        add.sleep3s();
                                         break;
                                     case 2:
-                                        beli.tambahTransaksi(
-                                                new cTransaksi(kode,
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         sandal,
                                                         jumlahBarang,
                                                         0));
+                                        add.sleep3s();
                                         break;
                                     case 3:
-                                        beli.tambahTransaksi(
-                                                new cTransaksi(kode,
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
                                                         namaPembeli,
                                                         sepatu,
                                                         jumlahBarang,
                                                         0));
+                                        add.sleep3s();
+                                        break;
+                                    case 4:
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
+                                                        namaPembeli,
+                                                        baju,
+                                                        jumlahBarang,
+                                                        0));
+                                        add.sleep3s();
+                                        break;
+                                    case 5:
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
+                                                        namaPembeli,
+                                                        celana,
+                                                        jumlahBarang,
+                                                        0));
+                                        add.sleep3s();
+                                        break;
+                                    case 6:
+                                        daftarTransaksi.tambahTransaksi(
+                                                new cTransaksi(kodeTr,
+                                                        namaPembeli,
+                                                        kaos,
+                                                        jumlahBarang,
+                                                        0));
+                                        add.sleep3s();
                                         break;
                                     default:
                                         System.out.println("Barang tidak ditemukan");
@@ -105,14 +142,27 @@ public class appToko {
                                 }
                                 break;
                             case 2:
+                                daftarTransaksi.lihatTransaksi();
                                 System.out.print("Barang yang dihapus: ");
                                 String barang = sc.next();
-                                beli.hapusTransaksi(namaPembeli, barang);
+                                daftarTransaksi.hapusTransaksi(namaPembeli, barang);
+                                add.sleep10s();
                                 break;
                             case 3:
-                                beli.lihatTransaksi();
+                                add.border();
+                                daftarTransaksi.lihatTransaksi();
+                                add.sleep3s();
                                 break;
                             case 4:
+
+                                break;
+                            case 5:
+                                add.exit();
+                                add.sleep3s();
+                                break;
+                            default:
+                                add.salahInput();
+                                add.sleep3s();
                                 break;
                         }
                     } while (pilih2 != 4);
@@ -129,14 +179,19 @@ public class appToko {
                     username = sc.next();
                     System.out.print("Masukkan password: ");
                     password = sc.next();
+                    add.border();
                     if (llMember.cariMember(username, password) == true) {
-                        System.out.println("  Selamat datang " + username);
                         do {
+                            add.border();
+                            System.out.println("  Selamat datang [" + username + "]");
+                            add.border();
                             System.out.println("  Menu Anggota");
                             System.out.println("  1. Tambah Transaksi");
                             System.out.println("  2. Hapus Transaksi");
                             System.out.println("  3. Lihat Transaksi");
-                            System.out.println("  4. Keluar");
+                            System.out.println("  4. Ubah Password");
+                            System.out.println("  5. Kembali");
+                            System.out.println("  6. Keluar");
                             System.out.print("  Pilih menu = ");
                             pilih2 = sc.nextInt();
                             switch (pilih2) {
@@ -150,28 +205,52 @@ public class appToko {
                                     int jumlahBarang = sc.nextInt();
                                     switch (pilihBarang) {
                                         case 1:
-                                            // beli.tambahTransaksi(new cTransaksi(kode, llMember.getNama(username),
+                                            // daftarTransaksi.tambahTransaksi(new cTransaksi(kodeTr,
+                                            // llMember.getNama(username),
                                             // tas,
                                             // jumlahBarang, 0));
                                             break;
                                         case 2:
-                                            // beli.tambahTransaksi(
-                                            // new cTransaksi(kode, llMember.getNama(username), sandal,
+                                            // daftarTransaksi.tambahTransaksi(
+                                            // new cTransaksi(kodeTr, llMember.getNama(username), sandal,
                                             // jumlahBarang, 0));
                                             break;
                                         case 3:
-                                            // beli.tambahTransaksi(
-                                            // new cTransaksi(kode, llMember.getNama(username), sepatu,
+                                            // daftarTransaksi.tambahTransaksi(
+                                            // new cTransaksi(kodeTr, llMember.getNama(username), sepatu,
                                             // jumlahBarang, 0));
+                                            break;
+                                        case 4:
+                                            // Ubah password
                                             break;
                                         default:
                                             System.out.println("Barang tidak ditemukan");
                                             break;
                                     }
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    System.out.println("Kembali ke menu sebelumnya");
+                                    add.sleep3s();
+                                    break;
+                                case 6:
+                                    add.exit();
+                                    add.sleep3s();
+                                    break;
+                                default:
+                                    add.salahInput();
+                                    add.sleep3s();
+                                    break;
                             }
-                        } while (pilih2 != 4);
+                        } while (pilih2 != 5);
                     } else {
                         add.salahLogin();
+                        add.sleep3s();
                     }
 
                     break;
@@ -187,9 +266,29 @@ public class appToko {
                     System.out.print("Masukkan password: ");
                     password = sc.next();
                     if (username.equalsIgnoreCase(userAdmin) && password.equalsIgnoreCase(passAdmin)) {
-
+                        add.cls();
+                        add.border();
+                        System.out.println("\n  Menu Admin [" + username + "]");
+                        add.border();
+                        System.out.println("  1. Mengganti proses transaksi");
+                        System.out.println("  2. Kembali");
+                        System.out.println("  3. Keluar");
+                        System.out.print("  Pilih menu = ");
+                        pilih2 = sc.nextInt();
+                        switch (pilih2) {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                add.salahInput();
+                                break;
+                        }
                     } else {
                         add.salahLogin();
+                        add.sleep3s();
                     }
                     break;
                 case 4:
@@ -207,6 +306,7 @@ public class appToko {
 
                     } else {
                         add.salahLogin();
+                        add.sleep3s();
                     }
                     break;
                 case 5:
@@ -217,6 +317,7 @@ public class appToko {
                 case 6:
                     // Keluar
                     add.exit();
+                    add.sleep3s();
                     break;
                 default:
                     System.out.println("Pilihan tidak ada");
@@ -225,5 +326,14 @@ public class appToko {
 
         } while (pilih != 6);
         sc.close();
+    }
+
+    static void printBarang() {
+        System.out.println("  1. [" + tas.getNama() + "]\t[" + tas.getHarga() + "]");
+        System.out.println("  2. [" + sandal.getNama() + "]\t[" + sandal.getHarga() + "]");
+        System.out.println("  3. [" + sepatu.getNama() + "]\t[" + sepatu.getHarga() + "]");
+        System.out.println("  4. [" + baju.getNama() + "]\t[" + baju.getHarga() + "]");
+        System.out.println("  5. [" + celana.getNama() + "]\t[" + celana.getHarga() + "]");
+        System.out.println("  6. [" + kaos.getNama() + "]\t[" + kaos.getHarga() + "]");
     }
 }
