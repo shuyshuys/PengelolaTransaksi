@@ -14,7 +14,18 @@ public class add {
         System.out.flush();
     }
 
+    public static void sleep3s() {
+        System.out.println("3s loading...");
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void sleep5s() {
+        System.out.println("5s loading...");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -38,7 +49,7 @@ public class add {
     }
 
     public static void salahLogin() {
-        System.out.println("Username atau Password Salah!");
+        System.out.println("  Username atau Password Salah!");
     }
 
     static void namaKelompok() {
