@@ -3,6 +3,7 @@ package com.shuyshuys.pasbp;
 public class cBarang {
     String nama;
     int harga;
+    cBarang next;
 
     cBarang(String nama, int harga) {
         this.nama = nama;
