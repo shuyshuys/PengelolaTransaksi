@@ -59,7 +59,7 @@ public class appToko {
                     add.border();
                     System.out.println("  Menu Pembeli");
                     add.border();
-                    System.out.print("Masukkan nama pembeli: ");
+                    System.out.print("  Masukkan nama pembeli: ");
                     String namaPembeli = sc.next();
                     do {
                         // add.cls();
