@@ -3,6 +3,8 @@ package com.shuyshuys.pasbp;
 import java.util.Scanner;
 
 public class appToko {
+
+    // next convert this to linkedlist >.<
     static cBarang tas = new cBarang("Tas", 100000);
     static cBarang sandal = new cBarang("Sandal", 50000);
     static cBarang sepatu = new cBarang("Sepatu", 150000);
@@ -67,18 +69,21 @@ public class appToko {
                         System.out.println("  1. Tambah Transaksi");
                         System.out.println("  2. Hapus Transaksi");
                         System.out.println("  3. Lihat Transaksi");
-                        System.out.println("  4. Kembali");
-                        System.out.println("  5. Keluar");
+                        System.out.println("  4. Bayar Transaksi");
+                        System.out.println("  5. Kembali");
+                        System.out.println("  6. Keluar");
                         System.out.print("  Pilih menu = ");
                         pilih2 = sc.nextInt();
                         switch (pilih2) {
                             case 1:
                                 add.border();
+                                System.out.println("    Menu Tambah Barang [" + namaPembeli + "]");
+                                add.border();
                                 printBarang();
                                 add.border();
-                                System.out.print("  Pilih barang: ");
+                                System.out.print("    Pilih barang: ");
                                 int pilihBarang = sc.nextInt();
-                                System.out.print("  Jumlah barang: ");
+                                System.out.print("    Jumlah barang: ");
                                 int jumlahBarang = sc.nextInt();
                                 add.border();
                                 switch (pilihBarang) {
@@ -88,6 +93,9 @@ public class appToko {
                                                         namaPembeli,
                                                         tas,
                                                         jumlahBarang,
+                                                        0,
+                                                        tas.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
@@ -97,6 +105,9 @@ public class appToko {
                                                         namaPembeli,
                                                         sandal,
                                                         jumlahBarang,
+                                                        0,
+                                                        sandal.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
@@ -106,6 +117,9 @@ public class appToko {
                                                         namaPembeli,
                                                         sepatu,
                                                         jumlahBarang,
+                                                        0,
+                                                        sepatu.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
@@ -115,6 +129,9 @@ public class appToko {
                                                         namaPembeli,
                                                         baju,
                                                         jumlahBarang,
+                                                        0,
+                                                        baju.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
@@ -124,6 +141,9 @@ public class appToko {
                                                         namaPembeli,
                                                         celana,
                                                         jumlahBarang,
+                                                        0,
+                                                        celana.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
@@ -133,17 +153,23 @@ public class appToko {
                                                         namaPembeli,
                                                         kaos,
                                                         jumlahBarang,
+                                                        0,
+                                                        kaos.getHarga() * jumlahBarang,
+                                                        0,
                                                         0));
                                         // add.sleep3s();
                                         break;
                                     default:
-                                        System.out.println("Barang tidak ditemukan");
+                                        System.out.println("    Barang tidak ditemukan");
                                         break;
                                 }
                                 break;
                             case 2:
+                                add.border();
+                                System.out.println("    Menu Penghapusan Barang [" + namaPembeli + "]");
+                                add.border();
                                 daftarTransaksi.peekTransaksi(kodeTr);
-                                System.out.print("Barang yang dihapus (0 untuk batal): ");
+                                System.out.print("    Barang yang dihapus (0 untuk batal): ");
                                 String barang = sc.next();
                                 if (barang.equals("0")) {
                                     break;
@@ -154,14 +180,54 @@ public class appToko {
                                 break;
                             case 3:
                                 add.border();
-                                daftarTransaksi.peekTransaksi(kodeTr);
+                                daftarTransaksi.peekTransaksi(namaPembeli);
+                                add.border();
                                 add.sleep3s();
                                 break;
                             case 4:
-                                System.out.println("Kembali ke menu sebelumnya...");
-                                add.sleep3s();
+                                add.border();
+                                System.out.println("    Menu Pembayaran [" + namaPembeli + "]");
+                                add.border();
+                                System.out.println("    1. Tunai");
+                                System.out.println("    2. Kembali");
+                                System.out.println("    3. Keluar");
+                                System.out.print("    Pilih menu = ");
+                                pilih2 = sc.nextInt();
+                                switch (pilih2) {
+                                    case 1:
+                                        add.border();
+                                        System.out.println("      Pembayaran Tunai");
+                                        add.border();
+                                        daftarTransaksi.peekTransaksi(namaPembeli);
+                                        add.border();
+                                        System.out.println("      Total tagihan anda = " +
+                                                daftarTransaksi.totalTagihan(namaPembeli));
+                                        System.out.print("      Masukkan uang: ");
+                                        int uang = sc.nextInt();
+                                        add.border();
+                                        System.out.println("      Transaksi berhasil");
+                                        System.out.println("      Kembalian = " +
+                                                (uang - daftarTransaksi.totalTagihan(namaPembeli)));
+
+                                        add.sleep3s();
+                                        break;
+                                    case 2:
+                                        System.out.println("      Kembali ke menu sebelumnya...");
+                                        add.sleep3s();
+                                        break;
+                                    case 3:
+                                        add.exit();
+                                        break;
+                                    default:
+                                        System.out.println("      Menu tidak ditemukan");
+                                        break;
+                                }
                                 break;
                             case 5:
+                                System.out.println("    Kembali ke menu sebelumnya...");
+                                add.sleep3s();
+                                break;
+                            case 6:
                                 add.exit();
                                 add.sleep3s();
                                 break;
@@ -180,9 +246,9 @@ public class appToko {
                     add.border();
                     System.out.println("\n  Menu Anggota");
                     add.border();
-                    System.out.print("Masukkan username: ");
+                    System.out.print("  Masukkan username: ");
                     username = sc.next();
-                    System.out.print("Masukkan password: ");
+                    System.out.print("  Masukkan password: ");
                     password = sc.next();
                     add.border();
                     if (llMember.cariMember(username, password) == true) {
@@ -217,7 +283,7 @@ public class appToko {
 
                                     break;
                                 case 5:
-                                    System.out.println("Kembali ke menu sebelumnya...");
+                                    System.out.println("  Kembali ke menu sebelumnya...");
                                     add.sleep3s();
                                     break;
                                 case 6:
@@ -243,9 +309,9 @@ public class appToko {
                     add.border();
                     System.out.println("  Menu Admin");
                     add.border();
-                    System.out.print("Masukkan username: ");
+                    System.out.print("  Masukkan username: ");
                     username = sc.next();
-                    System.out.print("Masukkan password: ");
+                    System.out.print("  Masukkan password: ");
                     password = sc.next();
                     Boolean end = false;
                     do {
@@ -270,11 +336,11 @@ public class appToko {
                                     do {
                                         // add.cls();
                                         add.border();
-                                        System.out.println("\n  --- Ubah Proses transaksi ---");
+                                        System.out.println("    --- Ubah Proses transaksi ---");
                                         add.border();
                                         daftarTransaksi.peekTransaksi();
                                         add.border();
-                                        System.out.print("  Kode Transaksi '0 untuk batal': ");
+                                        System.out.print("    Kode Transaksi '0 untuk batal': ");
                                         kodeTr = sc.nextInt();
                                         if (kodeTr == 0) {
                                             found = true;
@@ -285,7 +351,7 @@ public class appToko {
                                     } while (found == false);
                                     break;
                                 case 3:
-                                    System.out.println("Kembali ke menu sebelumnya...");
+                                    System.out.println("    Kembali ke menu sebelumnya...");
                                     add.sleep3s();
                                     break;
                                 case 4:
@@ -307,11 +373,11 @@ public class appToko {
                     // Pemilik : diikuti dengan pengisian password.
                     // add.cls();
                     add.border();
-                    System.out.println("\n  Menu Pemilik");
+                    System.out.println("  Menu Pemilik [" + userPemilik + "]");
                     add.border();
-                    System.out.print("Masukkan username: ");
+                    System.out.print("  Masukkan username: ");
                     username = sc.next();
-                    System.out.print("Masukkan password: ");
+                    System.out.print("  Masukkan password: ");
                     password = sc.next();
                     if (username.equalsIgnoreCase(userPemilik) && password.equalsIgnoreCase(passPemilik)) {
 
