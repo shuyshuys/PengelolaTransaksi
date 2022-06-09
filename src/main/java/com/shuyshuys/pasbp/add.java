@@ -1,6 +1,12 @@
 package com.shuyshuys.pasbp;
 
+import java.util.Scanner;
+
 public class add {
+    public static Scanner sc() {
+        return new Scanner(System.in);
+    }
+
     public static void border() {
         System.out.println("=================================================");
     }
