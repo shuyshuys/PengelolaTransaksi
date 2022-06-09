@@ -142,15 +142,19 @@ public class appToko {
                                 }
                                 break;
                             case 2:
-                                daftarTransaksi.peekTransaksi();
-                                System.out.print("Barang yang dihapus: ");
+                                daftarTransaksi.peekTransaksi(kodeTr);
+                                System.out.print("Barang yang dihapus (0 untuk batal): ");
                                 String barang = sc.next();
-                                daftarTransaksi.cariHapusTransaksi(namaPembeli, barang);
+                                if (barang.equals("0")) {
+                                    break;
+                                } else {
+                                    daftarTransaksi.cariHapusTransaksi(namaPembeli, barang);
+                                }
                                 add.sleep5s();
                                 break;
                             case 3:
                                 add.border();
-                                daftarTransaksi.peekTransaksi();
+                                daftarTransaksi.peekTransaksi(kodeTr);
                                 add.sleep3s();
                                 break;
                             case 4:
@@ -237,42 +241,71 @@ public class appToko {
                     // Admin : diikuti dengan pengisian password.
                     add.cls();
                     add.border();
-                    System.out.println("\n  Menu Admin");
+                    System.out.println("  Menu Admin");
                     add.border();
                     System.out.print("Masukkan username: ");
                     username = sc.next();
                     System.out.print("Masukkan password: ");
                     password = sc.next();
-                    if (username.equalsIgnoreCase(userAdmin) && password.equalsIgnoreCase(passAdmin)) {
-                        add.cls();
-                        add.border();
-                        System.out.println("\n  Menu Admin [" + username + "]");
-                        add.border();
-                        System.out.println("  1. Mengganti proses transaksi");
-                        System.out.println("  2. Kembali");
-                        System.out.println("  3. Keluar");
-                        System.out.print("  Pilih menu = ");
-                        pilih2 = sc.nextInt();
-                        switch (pilih2) {
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            case 3:
-                                break;
-                            default:
-                                add.salahInput();
-                                break;
+                    Boolean end = false;
+                    do {
+                        if (username.equalsIgnoreCase(userAdmin) && password.equalsIgnoreCase(passAdmin)) {
+                            add.cls();
+                            add.border();
+                            System.out.println("  Menu Admin [" + username + "]");
+                            add.border();
+                            System.out.println("  1. List Barang");
+                            System.out.println("  2. Mengganti status transaksi");
+                            System.out.println("  3. Kembali");
+                            System.out.println("  4. Keluar");
+                            System.out.print("  Pilih menu = ");
+                            pilih2 = sc.nextInt();
+                            switch (pilih2) {
+                                case 1:
+                                    daftarTransaksi.peekTransaksi();
+                                    break;
+                                case 2:
+                                    // proses transaksi
+                                    Boolean found = false;
+                                    do {
+                                        // add.cls();
+                                        add.border();
+                                        System.out.println("\n  --- Ubah Proses transaksi ---");
+                                        add.border();
+                                        daftarTransaksi.peekTransaksi();
+                                        add.border();
+                                        System.out.print("  Kode Transaksi '0 untuk batal': ");
+                                        kodeTr = sc.nextInt();
+                                        if (kodeTr == 0) {
+                                            found = true;
+                                        } else {
+                                            found = daftarTransaksi.ubahProsesTransaksi(kodeTr, found);
+                                        }
+                                        add.sleep5s();
+                                    } while (found == false);
+                                    break;
+                                case 3:
+                                    System.out.println("Kembali ke menu sebelumnya...");
+                                    add.sleep3s();
+                                    break;
+                                case 4:
+                                    add.exit();
+                                    add.sleep3s();
+                                    break;
+                                default:
+                                    add.salahInput();
+                                    break;
+                            }
+                        } else {
+                            add.salahLogin();
+                            add.sleep3s();
                         }
-                    } else {
-                        add.salahLogin();
-                        add.sleep3s();
-                    }
+                    } while (end == false);
                     break;
                 case 4:
                     // Pemilik
                     // Pemilik : diikuti dengan pengisian password.
-                    add.cls();
+                    // add.cls();
                     add.border();
                     System.out.println("\n  Menu Pemilik");
                     add.border();
