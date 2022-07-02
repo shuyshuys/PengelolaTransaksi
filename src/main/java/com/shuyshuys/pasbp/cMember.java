@@ -1,35 +1,16 @@
 package com.shuyshuys.pasbp;
 
-public class cMember {
-    int id;
-    String nama;
-    String password;
+public class cMember extends cObject {
     cMember next;
+    String password;
 
-    cMember(int id, String nama, String password) {
-        this.id = id;
-        this.nama = nama;
+    cMember(int idMember, String namaMember, String password) {
+        super(idMember, namaMember);
         this.password = password;
-    }
-
-    public int getID() {
-        return id;
-    }
-
-    public String getNama() {
-        return nama;
     }
 
     public String getPassword() {
         return password;
-    }
-
-    public void setID(int id) {
-        this.id = id;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
     }
 
     public void setPassword(String password) {
