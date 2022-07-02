@@ -1,57 +1,49 @@
 package com.shuyshuys.pasbp;
 
-public class cTransaksi {
-    private int kode;
-    private String namaPembeli;
-    private cBarang barang;
-    private int jumlahBarang;
-    private int statusTransaksi;
-    private int subTotal;
-    private int bayar;
-    private int kembalian;
+public class cTransaksi extends cObject {
+    // private int kode;
+    // private String namaPembeli;
+    // private cBarang barang;
+    // private int jumlahBarang;
+    // private int statusTransaksi;
+    // private int subTotal;
+    // private int bayar;
+    // private int kembalian;
     cTransaksi next;
 
-    cTransaksi(int kode,
-            String namaPembeli,
+    cTransaksi(int id,
+            String nama,
             cBarang barang,
-            int jumlahBarang,
-            int statusTransaksi,
+            int jumlah,
+            int status,
             int subTotal,
             int bayar,
             int kembalian) {
-        this.kode = kode;
-        this.namaPembeli = namaPembeli;
-        this.barang = barang;
-        this.jumlahBarang = jumlahBarang;
-        this.statusTransaksi = statusTransaksi;
-        this.next = null;
-        this.subTotal = subTotal;
-        this.bayar = bayar;
-        this.kembalian = kembalian;
+        super(id, nama, barang, jumlah, status, subTotal, bayar, kembalian);
     }
 
     public void setStatus(int status) {
-        this.statusTransaksi = status;
+        this.status = status;
     }
 
     public void setNext(cTransaksi next) {
         this.next = next;
     }
 
-    public void setKode(int kode) {
-        this.kode = kode;
-    }
+    // public void setKode(int kode) {
+    // this.kode = kode;
+    // }
 
-    public void setNamaPembeli(String namaPembeli) {
-        this.namaPembeli = namaPembeli;
-    }
+    // public void setNamaPembeli(String namaPembeli) {
+    // this.namaPembeli = namaPembeli;
+    // }
 
     public void setBarang(cBarang barang) {
         this.barang = barang;
     }
 
     public void setJumlahBarang(int jumlahBarang) {
-        this.jumlahBarang = jumlahBarang;
+        this.jumlah = jumlahBarang;
     }
 
     public void setSubTotal(int subTotal) {
@@ -67,23 +59,23 @@ public class cTransaksi {
     }
 
     public int getStatus() {
-        return statusTransaksi;
+        return status;
     }
 
-    public int getKode() {
-        return kode;
-    }
+    // public int getKode() {
+    // return kode;
+    // }
 
-    public String getNamaPembeli() {
-        return namaPembeli;
-    }
+    // public String getNamaPembeli() {
+    // return namaPembeli;
+    // }
 
     public cBarang getBarang() {
         return barang;
     }
 
     public int getJumlahBarang() {
-        return jumlahBarang;
+        return jumlah;
     }
 
     public int getSubTotal() {
@@ -103,8 +95,8 @@ public class cTransaksi {
     }
 
     public String toString() {
-        return "Kode Transaksi: " + kode + "\nNama Pembeli: " + namaPembeli + "\nNama Barang: " + barang.getNama()
-                + "\nHarga Barang: " + barang.getHarga() + "\nJumlah Barang: " + jumlahBarang + "\nStatus Transaksi: "
-                + statusTransaksi;
+        return "Kode Transaksi: " + id + "\nNama Pembeli: " + nama + "\nNama Barang: " + barang.getNama()
+                + "\nHarga Barang: " + barang.getHarga() + "\nJumlah Barang: " + jumlah + "\nStatus Transaksi: "
+                + status;
     }
 }
