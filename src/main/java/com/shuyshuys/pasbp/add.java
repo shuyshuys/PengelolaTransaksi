@@ -11,6 +11,10 @@ public class add {
         System.out.println("=================================================");
     }
 
+    public static void sBorder() {
+        System.out.println("------------------------------------------------");
+    }
+
     public static void salahInput() {
         System.out.println("Pilihan salah, mohon ulangi!");
     }
@@ -20,31 +24,26 @@ public class add {
         System.out.flush();
     }
 
-    public static void sleep3s() {
-        System.out.println("3s loading...");
+    public static void sleep(int ms) {
+        System.out.println("loading...");
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public static void sleep5s() {
-        System.out.println("5s loading...");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    static String getIndent(int indent) {
+        String i = "";
+        if (indent == 2) {
+            i = "  ";
+        } else if (indent == 4) {
+            i = "    ";
+        } else if (indent == 6) {
+            i = "      ";
         }
-    }
-
-    public static void sleep10s() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        return i;
     }
 
     public static void exit() {
