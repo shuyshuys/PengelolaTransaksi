@@ -54,6 +54,10 @@ public class cSimpul {
         return transaksi.getKembalian();
     }
 
+    public boolean getIsMember() {
+        return transaksi.getIsMember();
+    }
+
     public void setStatusTransaksi(int newStatus) {
         transaksi.setStatus(newStatus);
     }
@@ -82,9 +86,17 @@ public class cSimpul {
         return barang.getLaporanHarga();
     }
 
-    void setIDMember(int id) {
-        member.setID(id);
+    void setLaporanMember(int laporanHarga) {
+        member.setLaporanHarga(laporanHarga);
     }
+
+    int getLaporanMember() {
+        return member.getLaporanHarga();
+    }
+
+    // void setIDMember(int id) {
+    // member.setID(id);
+    // }
 
     void setNamaMember(String nama) {
         member.setNama(nama);
@@ -92,10 +104,6 @@ public class cSimpul {
 
     void setPasswordMember(String password) {
         member.setPassword(password);
-    }
-
-    void setLaporanMember(int laporanHarga) {
-        member.setLaporanHarga(laporanHarga);
     }
 
     int getIDMember() {
@@ -108,10 +116,6 @@ public class cSimpul {
 
     String getPasswordMember() {
         return member.getPassword();
-    }
-
-    int getLaporanMember() {
-        return member.getLaporanHarga();
     }
 
     public void getDataTransaksi() {
