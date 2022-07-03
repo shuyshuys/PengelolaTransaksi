@@ -48,9 +48,24 @@ public class add {
 
     public static void exit() {
         border();
-        System.out.println("Terima Kasih Telah Menggunakan Program ini!");
+        boolean exit = false;
+        String keluar = "";
+        System.out.print("Yakin? (y/n): ");
+        keluar = sc().next();
+        if (keluar.equalsIgnoreCase("y")) {
+            exit = true;
+        } else if (keluar.equalsIgnoreCase("n")) {
+            exit = false;
+        } else {
+            salahInput();
+        }
+        if (exit == true) {
+            System.out.println("Terima Kasih Telah Menggunakan Program ini!");
+            System.exit(0);
+        } else {
+            System.out.println("Tidak Jadi Keluar!");
+        }
         border();
-        System.exit(0);
     }
 
     public static void salahLogin() {
