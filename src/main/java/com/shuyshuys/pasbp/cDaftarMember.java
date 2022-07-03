@@ -4,6 +4,10 @@ public class cDaftarMember extends cDaftar {
     // cMember head, tail;
     // int jumlah;
 
+    cSimpul getHead() {
+        return head;
+    }
+
     // cDaftarMember() {
     // head = tail = null;
     // jumlah = 0;
@@ -51,11 +55,22 @@ public class cDaftarMember extends cDaftar {
     boolean cariMember(String user, String password) {
         for (cSimpul m = head; m != null; m = m.next) {
             if (m.getNamaMember().equals(user) && m.getPasswordMember().equals(password)) {
-                System.out.println("Member ditemukan");
+                System.out.println("  Member ditemukan");
                 return true;
             }
         }
-        System.out.println("Member tidak ditemukan");
+        System.out.println("  Member tidak ditemukan");
+        return false;
+    }
+
+    boolean cariPassword(String user, String password) {
+        for (cSimpul m = head; m != null; m = m.next) {
+            if (m.getNamaMember().equals(user) && m.getPasswordMember().equals(password)) {
+                System.out.println("  Password lama benar!");
+                return true;
+            }
+        }
+        System.out.println("  Password lama salah!");
         return false;
     }
 
@@ -66,5 +81,32 @@ public class cDaftarMember extends cDaftar {
             }
         }
         return 0;
+    }
+
+    void setPassword(String username, String password) {
+        for (cSimpul m = head; m != null; m = m.next) {
+            if (m.getNamaMember().equals(username)) {
+                m.setPasswordMember(password);
+            }
+        }
+    }
+
+    void setLaporanMember(String namaMember, int laporanHarga) {
+        for (cSimpul m = head; m != null; m = m.next) {
+            if (m.getIDMember() == Integer.valueOf(namaMember)) {
+                m.setLaporanMember(laporanHarga);
+            } else {
+
+            }
+        }
+    }
+
+    void getLaporanMember() {
+        add.sBorder();
+        System.out.println("LAPORAN MEMBER");
+        for (cSimpul m = head; m != null; m = m.next) {
+            add.sBorder();
+            System.out.println("Nama / Total: [" + m.getNamaMember() + "] / [" + m.getLaporanMember() + "]");
+        }
     }
 }

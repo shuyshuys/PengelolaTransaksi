@@ -42,19 +42,19 @@ public class cDaftarBarang extends cDaftar {
     }
 
     void getLaporanBarang() {
-        System.out.println("Laporan Barang");
+        add.sBorder();
+        System.out.println("  LAPORAN BARANG");
         for (cSimpul b = head; b != null; b = b.next) {
             add.sBorder();
-            System.out.println("Nama Barang: " + b.getNamaBarang());
-            System.out.println("Harga Barang: " + b.getLaporanBarang());
+            System.out.println("Barang / Total: [" + b.getNamaBarang() + "] / [" + b.getLaporanBarang() + "]");
         }
     }
 
-    cSimpul getLaporanBarang(String namaBarang) {
-        cSimpul b = head;
+    // cSimpul getLaporanBarang(String namaBarang) {
+    // cSimpul b = head;
 
-        return b;
-    }
+    // return b;
+    // }
 
     void setLaporanMember(String namaBarang, int laporanHarga) {
         for (cSimpul b = head; b != null; b = b.next) {
@@ -66,14 +66,13 @@ public class cDaftarBarang extends cDaftar {
         }
     }
 
-    void getLaporanMember() {
-        System.out.println("Laporan Member");
-        for (cSimpul b = head; b != null; b = b.next) {
-            add.sBorder();
-            if (true) {
-                System.out.println("Nama Barang: " + b.getNamaBarang());
-                System.out.println("Harga Barang: " + b.getLaporanMember());
-            }
-        }
-    }
+    // void getLaporanMember() {
+    // add.sBorder();
+    // System.out.println("LAPORAN MEMBER");
+    // for (cSimpul b = head; b != null; b = b.next) {
+    // add.sBorder();
+    // System.out.println("Barang / Total: [" + b.getNamaBarang() + "] / [" +
+    // b.getLaporanMember() + "]");
+    // }
+    // }
 }
