@@ -9,6 +9,7 @@ public class cTransaksi extends cObject {
     // private int subTotal;
     // private int bayar;
     // private int kembalian;
+    boolean isMember;
     cTransaksi next;
 
     cTransaksi(int id,
@@ -18,8 +19,10 @@ public class cTransaksi extends cObject {
             int status,
             int subTotal,
             int bayar,
-            int kembalian) {
+            int kembalian,
+            boolean isMember) {
         super(id, nama, barang, jumlah, status, subTotal, bayar, kembalian);
+        this.isMember = isMember;
     }
 
     public void setStatus(int status) {
@@ -58,6 +61,10 @@ public class cTransaksi extends cObject {
         this.kembalian = kembalian;
     }
 
+    public void setIsMember(boolean isMember) {
+        this.isMember = isMember;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -88,6 +95,10 @@ public class cTransaksi extends cObject {
 
     public int getKembalian() {
         return kembalian;
+    }
+
+    public boolean getIsMember() {
+        return isMember;
     }
 
     public cTransaksi getNext() {
