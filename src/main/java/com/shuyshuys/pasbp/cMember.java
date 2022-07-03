@@ -7,6 +7,7 @@ public class cMember extends cObject {
     cMember(int idMember, String namaMember, String password) {
         super(idMember, namaMember);
         this.password = password;
+        this.laporanHarga = 0;
     }
 
     public String getPassword() {
