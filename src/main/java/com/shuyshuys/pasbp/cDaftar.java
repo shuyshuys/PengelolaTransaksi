@@ -19,7 +19,7 @@ public class cDaftar {
             tail = simpulBaru;
         }
         jumlah++;
-        System.out.println("Telah berhasil disambungkan...");
+        System.out.println("  Simpul berhasil Disambungkan...");
     }
 
     public void dequeue() { // admin atau pembeli
