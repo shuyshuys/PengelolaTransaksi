@@ -62,6 +62,10 @@ public class cSimpul {
         transaksi.setStatus(newStatus);
     }
 
+    public cBarang getBarang() {
+        return barang;
+    }
+
     public String getNamaBarang() {
         return barang.getNama();
     }
@@ -70,8 +74,12 @@ public class cSimpul {
         return barang.getHarga();
     }
 
-    public int getJumlahBarang() {
+    public int getIdBarang() {
         return barang.getID();
+    }
+
+    public void setIdBarang(int id) {
+        barang.setID(id);
     }
 
     void setHargaBarang(int harga) {
@@ -129,12 +137,24 @@ public class cSimpul {
     }
 
     public void getDataBarang(cSimpul sBarang, int indent) {
-        int i = 1;
-        System.out.println("DAFTAR BARANG");
+        // int i = 1;
         String in = add.getIndent(indent);
+        System.out.println(in + "DAFTAR BARANG");
         for (cSimpul b = sBarang; b != null; b = b.next) {
-            System.out.println(in + i + ". [" + b.getNamaBarang() + "]\t\t[" + b.getHargaBarang() + "]");
-            i++;
+            if (b.getNamaBarang().length() < 6) {
+                System.out.println(
+                        in + "[" +
+                                b.getIdBarang() + "]\t[" +
+                                b.getNamaBarang() + "]\t\t[" +
+                                b.getHargaBarang() + "]");
+            } else {
+                System.out.println(
+                        in + "[" +
+                                b.getIdBarang() + "]\t[" +
+                                b.getNamaBarang() + "]\t[" +
+                                b.getHargaBarang() + "]");
+            }
+            // i++;
         }
     }
 
