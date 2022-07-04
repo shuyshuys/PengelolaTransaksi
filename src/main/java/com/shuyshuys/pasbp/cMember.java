@@ -8,6 +8,14 @@ public class cMember extends cObject {
         super(idMember, namaMember);
         this.password = password;
         this.laporanHarga = 0;
+        System.out.println("Member " + nama + " berhasil ditambahkan");
+    }
+
+    cMember(int idMember, String namaMember, String password, int laporanHarga) {
+        super(idMember, namaMember);
+        this.password = password;
+        this.laporanHarga = laporanHarga;
+        System.out.println("Member " + nama + " berhasil ditambahkan");
     }
 
     public String getPassword() {

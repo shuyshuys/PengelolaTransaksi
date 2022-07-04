@@ -3,8 +3,17 @@ package com.shuyshuys.pasbp;
 public class cBarang extends cObject {
     cBarang next;
 
-    cBarang(String namaBarang, int hargaBarang) {
+    cBarang(int id, String namaBarang, int hargaBarang) {
         super(namaBarang, hargaBarang);
+        this.id = id;
         this.laporanHarga = 0;
+        System.out.println("Barang " + nama + " berhasil ditambahkan");
+    }
+
+    cBarang(int id, String namaBarang, int hargaBarang, int laporanHarga) {
+        super(namaBarang, hargaBarang);
+        this.id = id;
+        this.laporanHarga = laporanHarga;
+        System.out.println("Barang " + nama + " berhasil ditambahkan");
     }
 }
