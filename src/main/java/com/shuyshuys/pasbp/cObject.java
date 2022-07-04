@@ -22,7 +22,6 @@ public class cObject {
     cObject(String nama, int harga) {
         this.nama = nama;
         this.harga = harga;
-        System.out.println("Barang " + nama + " berhasil ditambahkan");
     }
 
     cObject(int id,
@@ -69,7 +68,7 @@ public class cObject {
     }
 
     void setLaporanHarga(int laporanHarga) {
-        this.laporanHarga = laporanHarga;
+        this.laporanHarga = this.laporanHarga + laporanHarga;
     }
 
     int getLaporanHarga() {
