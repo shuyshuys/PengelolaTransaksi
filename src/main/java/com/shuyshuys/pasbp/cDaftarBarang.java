@@ -13,7 +13,7 @@ public class cDaftarBarang extends cDaftar {
         add.border();
     }
 
-    void searchBarang(String namaBarang) {
+    void ubahHargaBarang(String namaBarang) {
         for (cSimpul b = head; b != null; b = b.next) {
             if (b.getNamaBarang().equalsIgnoreCase(namaBarang)) {
                 add.border();
@@ -64,6 +64,26 @@ public class cDaftarBarang extends cDaftar {
 
             }
         }
+    }
+
+    public cBarang cariBarang(String namaBarang) {
+        for (cSimpul b = head; b != null; b = b.next) {
+            if (b.getNamaBarang().equalsIgnoreCase(namaBarang)) {
+                return b.getBarang();
+            } else {
+            }
+        }
+        return null;
+    }
+
+    public cBarang cariBarangInt(int id) {
+        for (cSimpul b = head; b != null; b = b.next) {
+            if (b.getIdBarang() == id) {
+                return b.getBarang();
+            } else {
+            }
+        }
+        return null;
     }
 
     // void getLaporanMember() {
