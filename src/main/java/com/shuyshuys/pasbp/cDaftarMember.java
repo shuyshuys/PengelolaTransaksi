@@ -108,5 +108,22 @@ public class cDaftarMember extends cDaftar {
             add.sBorder();
             System.out.println("Nama / Total: [" + m.getNamaMember() + "] / [" + m.getLaporanMember() + "]");
         }
+        add.sBorder();
+    }
+
+    public void peek() {
+        add.sBorder();
+        System.out.println("ID\tNama\t\tPassword");
+        for (cSimpul m = head; m != null; m = m.next) {
+            if (m.getNamaMember().length() < 6) {
+                System.out.println("[" + m.getIDMember() +
+                        "]\t[" + m.getNamaMember() +
+                        "]\t\t[" + m.getPasswordMember() + "]");
+            } else {
+                System.out.println("[" + m.getIDMember() +
+                        "]\t[" + m.getNamaMember() +
+                        "]\t[" + m.getPasswordMember() + "]");
+            }
+        }
     }
 }
