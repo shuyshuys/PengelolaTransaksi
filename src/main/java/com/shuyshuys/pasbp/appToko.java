@@ -1,60 +1,31 @@
 package com.shuyshuys.pasbp;
 
 public class appToko {
-
-    private static cBarang tas = new cBarang("Tas", 100000);
-    private static cBarang sandal = new cBarang("Sandal", 50000);
-    private static cBarang sepatu = new cBarang("Sepatu", 150000);
-    private static cBarang baju = new cBarang("Baju", 250000);
-    private static cBarang celana = new cBarang("Celana", 350000);
-    private static cBarang kaos = new cBarang("Kaos", 450000);
-
     private static cDaftarMember daftarMember = new cDaftarMember();
     private static cDaftarBarang daftarBarang = new cDaftarBarang();
-
-    static void data() {
-        // daftarBarang.tambahBarang(tas);
-        daftarBarang.enqueue(new cSimpul(tas));
-        // daftarBarang.tambahBarang(sandal);
-        daftarBarang.enqueue(new cSimpul(sandal));
-        // daftarBarang.tambahBarang(sepatu);
-        daftarBarang.enqueue(new cSimpul(sepatu));
-        // daftarBarang.tambahBarang(baju);
-        daftarBarang.enqueue(new cSimpul(baju));
-        // daftarBarang.tambahBarang(celana);
-        daftarBarang.enqueue(new cSimpul(celana));
-        // daftarBarang.tambahBarang(kaos);
-        daftarBarang.enqueue(new cSimpul(kaos));
-
-        cMember budi = new cMember(101, "Budi", "budi");
-        cMember siti = new cMember(102, "Siti", "siti");
-        cMember sri = new cMember(103, "Sri", "sri");
-
-        // daftarMember.tambahMember(budi);
-        daftarMember.enqueue(new cSimpul(budi));
-        // daftarMember.tambahMember(siti);
-        daftarMember.enqueue(new cSimpul(siti));
-        // daftarMember.tambahMember(sri);
-        daftarMember.enqueue(new cSimpul(sri));
-    }
-
-    // private static Boolean end = false;
+    private static cDaftarTransaksi daftarTransaksi = new cDaftarTransaksi();
+    private static mineWriter write = new mineWriter();
+    private static mineReader reader = new mineReader();
 
     private static int kodeTr = 200;
     private static String username, password;
-
     private static String userAdmin = "admin";
     private static String passAdmin = "admin";
-
     private static String userPemilik = "pemilik";
     private static String passPemilik = "pemilik";
 
+    static void initData() {
+        reader.getTransaksiFromDB(daftarTransaksi);
+        reader.getBarangFromDB(daftarBarang);
+        reader.getMemberFromDB(daftarMember);
+        kodeTr = reader.updateKodeTr();
+    }
+
     public static void main(String[] args) {
         // add.cls();
-        data();
+        initData();
 
-        cDaftarTransaksi daftarTransaksi = new cDaftarTransaksi();
-        int pilih = 0, pilih2 = 0;
+        int pilih = 0, pilih2 = 0, pilih3 = 0;
         // add.sleep(2000);
         do {
             // add.cls();
@@ -83,7 +54,7 @@ public class appToko {
                     do {
                         // add.cls();
                         add.border();
-                        System.out.println("  Pembeli [" + namaPembeli + "]");
+                        System.out.println("  Pembeli [" + namaPembeli + "] [" + kodeTr + "]");
                         add.border();
                         System.out.println("  1. Tambah Transaksi");
                         System.out.println("  2. Hapus Transaksi");
@@ -98,107 +69,21 @@ public class appToko {
                                 add.border();
                                 System.out.println("    Menu Tambah Barang [" + namaPembeli + "]");
                                 daftarBarang.peek(4);
-                                System.out.print("    Pilih barang: ");
+                                System.out.print("    Nama Barang: ");
+                                // String namaBarang = add.sc().nextLine();
                                 int pilihBarang = add.sc().nextInt();
                                 System.out.print("    Jumlah barang: ");
                                 int jumlahBarang = add.sc().nextInt();
                                 add.border();
-                                int laporanHarga = 0;
-                                switch (pilihBarang) {
-                                    case 1:
-                                        laporanHarga = tas.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                tas,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    case 2:
-                                        laporanHarga = sandal.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                sandal,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    case 3:
-                                        laporanHarga = sepatu.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                sepatu,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    case 4:
-                                        laporanHarga = baju.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                baju,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    case 5:
-                                        laporanHarga = celana.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                celana,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    case 6:
-                                        laporanHarga = kaos.getHarga() * jumlahBarang;
-                                        daftarTransaksi.enqueue(
-                                                new cSimpul(
-                                                        new cTransaksi(kodeTr,
-                                                                namaPembeli,
-                                                                kaos,
-                                                                jumlahBarang,
-                                                                0,
-                                                                laporanHarga,
-                                                                0,
-                                                                0,
-                                                                false)));
-                                        // add.sleep(2000);
-                                        break;
-                                    default:
-                                        System.out.println("    Barang tidak ditemukan");
-                                        break;
-                                }
+                                // cBarang barangTerpilih = daftarBarang.cariBarang(namaBarang);
+                                cBarang barangTerpilih = daftarBarang.cariBarangInt(pilihBarang);
+
+                                daftarTransaksi.beli(kodeTr, namaPembeli, barangTerpilih, jumlahBarang,
+                                        daftarTransaksi,
+                                        false);
+
+                                write.setTransaksiToDB(kodeTr, namaPembeli, barangTerpilih, jumlahBarang, 0, 0,
+                                        0, false);
                                 break;
                             case 2:
                                 add.border();
@@ -288,7 +173,7 @@ public class appToko {
                     if (daftarMember.cariMember(username, password) == true) {
                         do {
                             add.border();
-                            System.out.println("  Selamat datang [" + username + "]");
+                            System.out.println("  Selamat datang [" + username + "] [" + kodeTr + "]");
                             add.border();
                             System.out.println("  Menu Anggota");
                             System.out.println("  1. Tambah Transaksi");
@@ -305,111 +190,22 @@ public class appToko {
                                     System.out.println("   Menu Tambah Barang [" + username + "]");
                                     daftarBarang.peek(4);
                                     System.out.print("    Pilih barang: ");
+                                    // String namaBarang = add.sc().nextLine();
                                     int pilihBarang = add.sc().nextInt();
                                     System.out.print("    Jumlah barang: ");
                                     int jumlahBarang = add.sc().nextInt();
                                     add.border();
-                                    int laporanHarga = 0;
-                                    switch (pilihBarang) {
-                                        case 1:
-                                            laporanHarga = tas.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    tas,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            break;
-                                        case 2:
-                                            laporanHarga = sandal.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    sandal,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            // add.sleep(2000);
-                                            break;
-                                        case 3:
-                                            laporanHarga = sepatu.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    sepatu,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            // add.sleep(2000);
-                                            break;
-                                        case 4:
-                                            laporanHarga = baju.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    baju,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            // add.sleep(2000);
-                                            break;
-                                        case 5:
-                                            laporanHarga = celana.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    celana,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            // add.sleep(2000);
-                                            break;
-                                        case 6:
-                                            laporanHarga = kaos.getHarga() * jumlahBarang * 95 / 100;
-                                            daftarTransaksi.enqueue(
-                                                    new cSimpul(
-                                                            new cTransaksi(kodeTr,
-                                                                    Integer.toString(
-                                                                            daftarMember.cariIdMember(username)),
-                                                                    kaos,
-                                                                    jumlahBarang,
-                                                                    0,
-                                                                    laporanHarga,
-                                                                    0,
-                                                                    0,
-                                                                    true)));
-                                            // add.sleep(2000);
-                                            break;
-                                        default:
-                                            System.out.println("    Barang tidak ditemukan");
-                                            break;
-                                    }
+                                    cBarang barangTerpilih = daftarBarang.cariBarangInt(pilihBarang);
+
+                                    write.setTransaksiToDB(kodeTr,
+                                            Integer.toString(daftarMember.cariIdMember(username)), barangTerpilih,
+                                            jumlahBarang,
+                                            0, 0, 0, true);
+
+                                    daftarTransaksi.beli(kodeTr,
+                                            Integer.toString(daftarMember.cariIdMember(username)), barangTerpilih,
+                                            jumlahBarang, daftarTransaksi, true);
+
                                     break;
                                 case 2:
                                     // hapus transaksi
@@ -486,10 +282,11 @@ public class appToko {
                             add.border();
                             System.out.println("  Menu Admin [" + username + "]");
                             add.border();
-                            System.out.println("  1. List Barang");
-                            System.out.println("  2. Mengganti status transaksi");
-                            System.out.println("  3. Kembali");
-                            System.out.println("  4. Keluar");
+                            System.out.println("  1. List Transaksi");
+                            System.out.println("  2. Menu Member");
+                            System.out.println("  3. Mengganti status transaksi");
+                            System.out.println("  4. Kembali");
+                            System.out.println("  5. Keluar");
                             System.out.print("  Pilih menu = ");
                             pilih2 = add.sc().nextInt();
                             switch (pilih2) {
@@ -498,7 +295,31 @@ public class appToko {
                                     add.sleep(3000);
                                     break;
                                 case 2:
-                                    // proses transaksi
+                                    do {
+                                        add.sBorder();
+                                        System.out.println("    Menu Admin Member");
+                                        System.out.println("    1. Lihat Member");
+                                        System.out.println("    2. Tambah Member");
+                                        System.out.println("    3. Kembali");
+                                        System.out.print("    Pilih menu = ");
+                                        pilih3 = add.sc().nextInt();
+                                        if (pilih3 == 1) {
+                                            daftarMember.peek();
+                                        } else if (pilih3 == 2) {
+                                            System.out.print("    Nama Member: ");
+                                            String newMem = add.sc().next();
+                                            System.out.print("    Password Member: ");
+                                            String newPass = add.sc().next();
+                                            int newId = daftarMember.tail.getIDMember() + 1;
+                                            cMember m = new cMember(newId, newMem, newPass);
+                                            daftarMember.enqueue(new cSimpul(m));
+                                            write.setMemberToDB(newId, newMem, newPass);
+                                        }
+                                        add.sleep(3000);
+                                    } while (pilih3 != 3);
+                                    break;
+                                case 3:
+                                    // Mengubah status transaksi
                                     Boolean found = false;
                                     do {
                                         // add.cls();
@@ -518,11 +339,11 @@ public class appToko {
                                         add.sleep(3500);
                                     } while (found == false);
                                     break;
-                                case 3:
+                                case 4:
                                     System.out.println("    Kembali ke menu sebelumnya...");
                                     add.sleep(2000);
                                     break;
-                                case 4:
+                                case 5:
                                     add.exit();
                                     add.sleep(2000);
                                     break;
@@ -530,10 +351,9 @@ public class appToko {
                                     add.salahInput();
                                     break;
                             }
-                        } while (pilih2 != 3);
+                        } while (pilih2 != 4);
                     } else {
                         add.salahLogin();
-                        // end = true;
                         add.sleep(2000);
                     }
                     break;
@@ -595,7 +415,7 @@ public class appToko {
                                     System.out.println("    Menu Mengubah Harga Barang");
                                     System.out.print("    Nama Barang: ");
                                     String namaBarang = add.sc().nextLine();
-                                    daftarBarang.searchBarang(namaBarang);
+                                    daftarBarang.ubahHargaBarang(namaBarang);
                                     break;
                                 case 4:
                                     daftarBarang.getLaporanBarang();
