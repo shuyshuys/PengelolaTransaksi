@@ -12,6 +12,7 @@ public class mineWriter {
         } catch (SQLException e) {
             System.err.println(e);
         }
+        con.close();
     }
 
     void setTransaksiToDB(int kodeTr,
@@ -45,6 +46,7 @@ public class mineWriter {
         } catch (SQLException e) {
             System.err.println(e);
         }
+        con.close();
     }
 
     void updateStatusTransaksiToDB(int kodeTr) {
@@ -57,6 +59,7 @@ public class mineWriter {
         } catch (SQLException e) {
             System.err.println(e);
         }
+        con.close();
     }
 
     void updateLaporan(int laporanHarga, String table, int id, String SET, String WHERE) {
@@ -68,14 +71,45 @@ public class mineWriter {
         } catch (SQLException e) {
             System.err.println(e);
         }
+        con.close();
     }
 
-    // public static void main(String[] args) {
-    // mineWriter w = new mineWriter();
-    // cDaftarBarang b = new cDaftarBarang();
-    // // System.out.println(b.getHead().getBarangTransaksi());
-    // // w.setTransaksiToDB(200, "shuya", b.getHead().getBarangTransaksi(), 3, 0,
-    // 0,
-    // // 0, false);
-    // }
+    public void deleteTransaksi(int kodeTransaksi) {
+        koneksi con = new koneksi();
+        try {
+            String sql = "DELETE FROM `transaksi` WHERE `transaksi`.`id`='" + kodeTransaksi + "';";
+            con.getCon().createStatement().executeUpdate(sql);
+            System.out.println("SUKSES menghapus transaksi dengan kode " + kodeTransaksi + " dalam database!");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        con.close();
+    }
+
+    public void deleteTransaksi(String namaPembeli, String barang) {
+        koneksi con = new koneksi();
+        try {
+            String sql = "DELETE FROM `transaksi` WHERE nama_pembeli='" + namaPembeli + "', nama_barang='" + barang
+                    + "';";
+            con.getCon().createStatement().executeUpdate(sql);
+            System.out.println("SUKSES menghapus transaksi dalam database!");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        con.close();
+    }
+
+    public void setBayarToDB(int uang, int kembalian, int kodeTr) {
+        koneksi con = new koneksi();
+        try {
+            String sql = "UPDATE transaksi SET bayar=" + uang +
+                    ", kembalian=" + kembalian +
+                    " WHERE id=" + kodeTr + ";";
+            con.getCon().createStatement().executeUpdate(sql);
+            System.out.println("SUKSES mengupdate bayar dan kembalian dalam database!");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        con.close();
+    }
 }
