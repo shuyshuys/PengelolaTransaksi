@@ -62,6 +62,14 @@ public class cSimpul {
         transaksi.setStatus(newStatus);
     }
 
+    public void setBayarTransaksi(int bayar) {
+        transaksi.setBayar(bayar);
+    }
+
+    public void setKembalian(int kembalian) {
+        transaksi.setKembalian(kembalian);
+    }
+
     public cBarang getBarang() {
         return barang;
     }
