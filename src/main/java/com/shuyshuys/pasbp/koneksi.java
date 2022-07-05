@@ -2,6 +2,7 @@ package com.shuyshuys.pasbp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -23,9 +24,20 @@ public class koneksi {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://remotemysql.com/" + db, user, password);
             stm = con.createStatement();
-            System.out.println("   - Koneksi ke database " + db + " Berhasil!");
+            // System.out.println(" - Koneksi ke database " + db + " Berhasil!");
+            add.sBorder();
+            System.out.println("  - Connected.., ");
         } catch (Exception e) {
             System.err.println("   - Koneksi ke database Gagal! " + e.getMessage());
+            e.printStackTrace();
+        }
+        return con;
+    }
+
+    public Connection close() {
+        try {
+            con.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return con;
