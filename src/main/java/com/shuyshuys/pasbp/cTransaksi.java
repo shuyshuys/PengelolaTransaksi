@@ -15,7 +15,7 @@ public class cTransaksi extends cObject {
             boolean isMember) {
         super(kodeTr, nama, barang, jumlah, status, subTotal, bayar, kembalian);
         this.isMember = isMember;
-        System.out.println("Transaksi " + nama + " berhasil ditambahkan");
+        System.out.println("    Transaksi " + nama + " ditambahkan");
     }
 
     public void setStatus(int status) {
