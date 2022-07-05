@@ -2,6 +2,14 @@ package com.shuyshuys.pasbp;
 
 public class cDaftarTransaksi extends cDaftar {
 
+    cSimpul getHead() {
+        return head;
+    }
+
+    cSimpul getTail() {
+        return tail;
+    }
+
     public void beli(int kodeTr, String namaPembeli, cBarang barang, int jumlahBarang,
             cDaftarTransaksi daftarTransaksi,
             boolean isMember) {
@@ -32,11 +40,13 @@ public class cDaftarTransaksi extends cDaftar {
 
     public void peek() {
         if (head == null && tail == null) {
-            System.out.println("Transaksi kosong!");
+            System.out.println("TRANSAKSI KOSONG!");
             add.border();
         } else {
             int i = 1;
-            System.out.println("Daftar Transaksi");
+            add.sBorder();
+            System.out.println("DAFTAR TRANSAKSI");
+            add.sBorder();
             System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
             for (cSimpul t = head; t != null; t = t.next) {
                 if (t.getNamaTransaksi().length() >= 6) {
@@ -83,13 +93,15 @@ public class cDaftarTransaksi extends cDaftar {
     public void peek(String namaPembeli) {
         add.border();
         if (head == null && tail == null) {
-            System.out.println("Transaksi kosong!");
+            System.out.println("TRANSAKSI KOSONG!");
         } else {
             // cSimpul temp = null;
             cSimpul temp = searchPembeli(namaPembeli);
             if (temp != null) {
                 int i = 1;
-                System.out.println("Daftar Transaksi");
+                add.sBorder();
+                System.out.println("DAFTAR TRANSAKSI");
+                add.sBorder();
                 System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
                 for (cSimpul t = head; t != null; t = t.next) {
                     if (t.getNamaTransaksi().length() >= 6) {
@@ -139,7 +151,7 @@ public class cDaftarTransaksi extends cDaftar {
                     }
                 }
             } else {
-                System.out.println("Transaksi kosong!");
+                System.out.println("TRANSAKSI KOSONG!");
             }
         }
         add.border();
@@ -148,13 +160,14 @@ public class cDaftarTransaksi extends cDaftar {
     public void peek(int kode) {
         add.sBorder();
         if (head == null && tail == null) {
-            System.out.println("Transaksi kosong!");
+            System.out.println("TRANSAKSI KOSONG!");
         } else {
             Boolean found = false;
             found = kodeTransaksiIsFound(kode);
             if (found == true) {
                 int i = 1;
-                System.out.println("Daftar Transaksi");
+                System.out.println("DAFTAR TRANSAKSI");
+                add.sBorder();
                 System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
                 for (cSimpul t = head; t != null; t = t.next) {
                     if (t.getNamaTransaksi().length() >= 6) {
@@ -204,23 +217,26 @@ public class cDaftarTransaksi extends cDaftar {
                     }
                 }
             } else {
-                System.out.println("Transaksi kosong!");
+                System.out.println("TRANSAKSI KOSONG!");
             }
         }
     }
 
     public void peekStatus(int status) {
-        add.border();
+        add.sBorder();
         if (head == null && tail == null) {
-            System.out.println("Transaksi kosong!");
+            System.out.println("TRANSAKSI KOSONG!");
         } else {
             int i = 1;
             if (status == 1) {
                 System.out.println("Daftar Transaksi yang SUDAH di Proses");
+                add.sBorder();
+                System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
             } else {
                 System.out.println("Daftar Transaksi yang BELUM di Proses");
+                add.sBorder();
+                System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
             }
-            System.out.println("NO  KODE NAMA\t\tBARANG\t\tJUMLAH\tSTATUS");
             for (cSimpul t = head; t != null; t = t.next) {
                 if (t.getNamaTransaksi().length() >= 6) {
                     if (t.getBarangTransaksi().getNama().length() >= 6) {
@@ -295,7 +311,7 @@ public class cDaftarTransaksi extends cDaftar {
         // daftarTransaksi
         found = kodeTransaksiIsFound(kodeTr);
         if (found == true) {
-            System.out.println("  Transaksi ditemukan");
+            System.out.println("  TRANSAKSI DITEMUKAN!");
             // Menampilkan transaksi sebelum dilakukan pengubahan status dengan filter
             // kodeTr
             peek(kodeTr);
@@ -304,15 +320,23 @@ public class cDaftarTransaksi extends cDaftar {
             // Pengecekan ulang sebelum dilakukan pengubahan status transaksi
             if (jawab.equalsIgnoreCase("y")) {
                 for (cSimpul t = head; t != null; t = t.next) {
+                    String namaBarang = t.getBarangTransaksi().getNama();
                     if (t.getIDTransaksi() == kodeTr) {
                         // Mengubah status dari 0 ke 1
                         t.setStatusTransaksi(1);
                         // Update status transaksi dari 0 ke 1 pada database
                         write.updateStatusTransaksiToDB(kodeTr);
-                        // Update akumulasi laporan barang
-                        b.setLaporanHarga(t.getBarangTransaksi().getNama(), t.getSubTotalTransaksi());
+                        // Update akumulasi laporan barang pada local
+                        b.setLaporanHarga(namaBarang, t.getSubTotalTransaksi());
+
+                        int laporanHarga = 0;
+                        for (cSimpul bb = b.getHead(); bb != null; bb = bb.next) {
+                            if (namaBarang.equalsIgnoreCase(bb.getBarang().getNama())) {
+                                laporanHarga = bb.getLaporanBarang();
+                            }
+                        }
                         // Update akumulasi laporan barang pada database
-                        write.updateLaporan(t.getSubTotalTransaksi(),
+                        write.updateLaporan(laporanHarga,
                                 "barang",
                                 t.getBarangTransaksi().getID(),
                                 "laporan_barang",
@@ -320,10 +344,11 @@ public class cDaftarTransaksi extends cDaftar {
                         if (t.getIsMember() == true) {
                             for (cSimpul mm = m.getHead(); mm != null; mm = mm.next) {
                                 if (Integer.valueOf(t.getNamaTransaksi()) == mm.getIDMember()) {
-                                    // Update akumulasi laporan member
+                                    // Update akumulasi laporan member pada local
                                     mm.setLaporanMember(t.getSubTotalTransaksi());
                                     // Update akumulasi laporan member pada database
-                                    write.updateLaporan(t.getSubTotalTransaksi(),
+                                    laporanHarga = t.getSubTotalTransaksi() + mm.getLaporanMember();
+                                    write.updateLaporan(laporanHarga,
                                             "member",
                                             mm.getIDMember(),
                                             "laporan_member",
@@ -338,10 +363,10 @@ public class cDaftarTransaksi extends cDaftar {
                 found = true;
                 System.out.println("  Status transaksi berhasil diubah");
             } else {
-                System.out.println("  Status transaksi tidak diubah");
+                System.out.println("  STATUS TRANSAKSI TIDAK DIUBAH!");
             }
         } else {
-            System.out.println("  Transaksi tidak ditemukan");
+            System.out.println("  TRANSAKSI TIDAK DITEMUKAN!");
         }
         return found;
     }
@@ -356,7 +381,7 @@ public class cDaftarTransaksi extends cDaftar {
                 temp = temp.next;
             }
             jumlah--;
-            System.out.println("Transaksi berhasil dihapus");
+            System.out.println("TRANSAKSI BERHASIL DIHAPUS");
         } else {
             while (temp.next != null) {
                 if (temp.next.getNamaTransaksi().equalsIgnoreCase(namaPembeli)
@@ -369,7 +394,7 @@ public class cDaftarTransaksi extends cDaftar {
                         temp.next = null;
                     }
                     jumlah--;
-                    System.out.println("Transaksi berhasil dihapus");
+                    System.out.println("TRANSAKSI BERHASIL DIHAPUS");
                     break;
                 }
                 temp = temp.next;
@@ -377,7 +402,7 @@ public class cDaftarTransaksi extends cDaftar {
         }
     }
 
-    public int totalTagihanPembeli(String namaPembeli) {
+    public int totalTagihan(String namaPembeli) {
         int total = 0;
         cSimpul temp = head;
         while (temp != null) {
@@ -409,5 +434,58 @@ public class cDaftarTransaksi extends cDaftar {
             index++;
         }
         return index;
+    }
+
+    public void sambungTransaksi(cDaftarTransaksi daftarTransaksi, cDaftarTransaksi tempDaftarTransaksi) {
+        cSimpul headTr = daftarTransaksi.getHead();
+        cSimpul tailTr = daftarTransaksi.getTail();
+        cSimpul headTempTr = tempDaftarTransaksi.getHead();
+        cSimpul tailTempTr = tempDaftarTransaksi.getTail();
+        if (headTr == null) {
+            headTr = headTempTr;
+            tailTr = tailTempTr;
+        } else {
+            tailTr.next = headTempTr;
+            tailTr = tailTempTr;
+        }
+    }
+
+    public void hapusTransaksi(int kodeTransaksi) {
+        cSimpul t = head;
+        if (t.getIDTransaksi() == kodeTransaksi) {
+            if (t.next == null) {
+                t = tail = null;
+            } else {
+                t = t.next;
+            }
+            jumlah--;
+            System.out.println("TRANSAKSI BERHASIL DIHAPUS");
+        } else {
+            for (; t.next != null;) {
+                if (t.next.getIDTransaksi() == kodeTransaksi) {
+                    if (t.next.next != null) {
+                        t.next = t.next.next;
+                        // tail = t.next;
+                    } else {
+                        tail = t;
+                        t.next = null;
+                    }
+                    jumlah--;
+                    System.out.println("TRANSAKSI BERHASIL DIHAPUS");
+                    // break;
+                } else {
+                    t = t.next;
+                }
+            }
+        }
+    }
+
+    public void setBayar(int uang, int kembalian, int kodeTr) {
+        for (cSimpul t = head; t != null; t = t.next) {
+            if (t.getIDTransaksi() == kodeTr) {
+                t.setBayarTransaksi(uang);
+                t.setKembalian(kembalian);
+            }
+        }
     }
 }
