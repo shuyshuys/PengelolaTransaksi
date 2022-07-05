@@ -43,18 +43,23 @@ public class cDaftarBarang extends cDaftar {
 
     void getLaporanBarang() {
         add.sBorder();
+        int totalPendapatan = getTotalPendapatan();
+
         System.out.println("  LAPORAN BARANG");
+        System.out.println("Total Pendapatan: [" + totalPendapatan + "]");
         for (cSimpul b = head; b != null; b = b.next) {
             add.sBorder();
             System.out.println("Barang / Total: [" + b.getNamaBarang() + "] / [" + b.getLaporanBarang() + "]");
         }
     }
 
-    // cSimpul getLaporanBarang(String namaBarang) {
-    // cSimpul b = head;
-
-    // return b;
-    // }
+    int getTotalPendapatan() {
+        int totalPendapatan = 0;
+        for (cSimpul b = head; b != null; b = b.next) {
+            totalPendapatan = totalPendapatan + b.getLaporanBarang();
+        }
+        return totalPendapatan;
+    }
 
     void setLaporanMember(String namaBarang, int laporanHarga) {
         for (cSimpul b = head; b != null; b = b.next) {
@@ -85,14 +90,4 @@ public class cDaftarBarang extends cDaftar {
         }
         return null;
     }
-
-    // void getLaporanMember() {
-    // add.sBorder();
-    // System.out.println("LAPORAN MEMBER");
-    // for (cSimpul b = head; b != null; b = b.next) {
-    // add.sBorder();
-    // System.out.println("Barang / Total: [" + b.getNamaBarang() + "] / [" +
-    // b.getLaporanMember() + "]");
-    // }
-    // }
 }
